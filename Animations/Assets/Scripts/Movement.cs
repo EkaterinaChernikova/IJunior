@@ -2,11 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
+    private const string Speed = "Speed";
+
+    [SerializeField] private float _speed = 10;
+    [SerializeField] private float _rotationSpeed = 240;
     private float _animationSwitch = 0.0f;
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+
+    }
 
     private void Update()
     {
@@ -42,6 +53,6 @@ public class Movement : MonoBehaviour
             _animationSwitch = 0.0f;
         }
 
-        GetComponent<Animator>().SetFloat("Speed", _animationSwitch);
+        _animator.SetFloat(Speed, _animationSwitch);
     }
 }
